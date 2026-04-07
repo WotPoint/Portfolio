@@ -4,7 +4,7 @@ function getToken() {
   return localStorage.getItem('admin_token')
 }
 
-function authHeaders() {
+function authHeaders(): Record<string, string> {
   const token = getToken()
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
@@ -13,14 +13,12 @@ async function request<T>(
   url: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const res = await fetch(`${BASE}${url}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...authHeaders(),
-      ...options.headers,
-    },
-  })
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...authHeaders(),
+    ...(options.headers as Record<string, string> | undefined),
+  }
+  const res = await fetch(`${BASE}${url}`, { ...options, headers })
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: res.statusText }))
     throw new Error(err.error || 'Request failed')
