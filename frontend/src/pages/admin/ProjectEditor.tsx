@@ -124,7 +124,7 @@ export default function AdminProjectEditor() {
     if (remaining <= 0) return
     setUploading(true)
     try {
-      const compressed = await Promise.all(files.slice(0, remaining).map(compressImage))
+      const compressed = await Promise.all(files.slice(0, remaining).map((f) => compressImage(f)))
       const urls = await uploadScreenshots(compressed)
       setField('screenshots', [...form.screenshots, ...urls])
     } catch {
