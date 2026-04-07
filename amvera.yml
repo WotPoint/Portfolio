@@ -6,8 +6,7 @@ meta:
 build:
   skip: false
   additionalCommands:
-    - npm install --include=dev
-    - npm run build
+    - npm install --include=dev && npm run build
   artifacts:
     "*": /
 run:
