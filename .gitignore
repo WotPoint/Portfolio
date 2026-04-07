@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+*.db
+*.db-journal
+frontend/dist/
+backend/uploads/
+.DS_Store
