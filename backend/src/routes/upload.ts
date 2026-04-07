@@ -6,7 +6,11 @@ import { authMiddleware, AuthRequest } from '../middleware/auth'
 
 const router = Router()
 
-const uploadsDir = path.join(__dirname, '../../uploads')
+// In production use /data/uploads (Amvera persistent volume), locally use ./uploads
+const uploadsDir = process.env.NODE_ENV === 'production'
+  ? '/data/uploads'
+  : path.join(__dirname, '../../uploads')
+
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true })
 }

@@ -16,8 +16,11 @@ const PORT = process.env.PORT || 3001
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }))
 app.use(express.json())
 
-// Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
+// Serve uploaded files (persistent volume in production)
+const uploadsDir = process.env.NODE_ENV === 'production'
+  ? '/data/uploads'
+  : path.join(__dirname, '../uploads')
+app.use('/uploads', express.static(uploadsDir))
 
 // API routes
 app.use('/api/auth', authRouter)
