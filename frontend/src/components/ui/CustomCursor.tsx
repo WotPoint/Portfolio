@@ -9,7 +9,16 @@ export default function CustomCursor() {
     const dot = dotRef.current as HTMLDivElement
     const ring = ringRef.current as HTMLDivElement
 
-    document.body.classList.add('hide-cursor')
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const applyHideCursor = (e: MediaQueryList | MediaQueryListEvent) => {
+      if (e.matches) {
+        document.body.classList.add('hide-cursor')
+      } else {
+        document.body.classList.remove('hide-cursor')
+      }
+    }
+    applyHideCursor(mq)
+    mq.addEventListener('change', applyHideCursor)
 
     let mouseX = 0, mouseY = 0
     let ringX = 0, ringY = 0
@@ -57,6 +66,7 @@ export default function CustomCursor() {
 
     return () => {
       document.body.classList.remove('hide-cursor')
+      mq.removeEventListener('change', applyHideCursor)
       window.removeEventListener('mousemove', onMouseMove)
       cancelAnimationFrame(raf)
       interactives.forEach((el) => {

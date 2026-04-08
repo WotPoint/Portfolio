@@ -43,7 +43,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="font-jakarta text-sm text-muted hover:text-primary transition-colors"
+              className="font-jakarta text-sm text-primary/70 hover:text-primary transition-colors"
             >
               {link.label}
             </a>
@@ -52,7 +52,7 @@ export default function Navbar() {
           {/* Lang toggle */}
           <button
             onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-            className="font-mono text-xs border border-border px-3 py-1 text-muted hover:border-accent hover:text-accent transition-all"
+            className="font-mono text-xs border border-border px-3 py-1 text-primary/70 hover:border-accent hover:text-accent transition-all"
           >
             {lang === 'ru' ? 'EN' : 'RU'}
           </button>
@@ -93,7 +93,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="font-jakarta text-sm text-muted hover:text-primary transition-colors"
+                  className="font-jakarta text-sm text-primary/70 hover:text-primary transition-colors"
                 >
                   {link.label}
                 </a>

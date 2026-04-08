@@ -38,12 +38,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Header - always visible */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full text-left p-6 md:p-8 flex items-start justify-between gap-4 group"
+        className="w-full text-left p-4 sm:p-6 md:p-8 flex items-start justify-between gap-3 group"
       >
-        <div className="flex items-start gap-6">
-          <span className="font-mono text-xs text-dim pt-1">{num}</span>
-          <div>
-            <h3 className="font-syne font-extrabold text-2xl md:text-3xl text-primary group-hover:text-accent transition-colors">
+        <div className="flex items-start gap-4 min-w-0">
+          <span className="font-mono text-xs text-dim pt-1 flex-shrink-0">{num}</span>
+          <div className="min-w-0">
+            <h3 className="font-syne font-extrabold text-xl sm:text-2xl md:text-3xl text-primary group-hover:text-accent transition-colors">
               {title}
             </h3>
             <p className="font-mono text-xs text-muted mt-1">{tagline}</p>
@@ -59,22 +59,34 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 flex-shrink-0 pt-1">
+        <div className="flex items-center gap-2 flex-shrink-0 pt-1">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="font-mono text-xs border border-border px-3 py-1.5 text-muted hover:border-accent hover:text-accent transition-all"
+              className="font-mono text-xs border border-border px-2 sm:px-3 py-1.5 text-muted hover:border-accent hover:text-accent transition-all hidden sm:inline-flex items-center gap-1"
             >
               {t('Открыть', 'Live')} ↗
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="font-mono text-xs border border-border w-8 h-8 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-all sm:hidden"
+              aria-label={t('Открыть', 'Live')}
+            >
+              ↗
             </a>
           )}
           <motion.div
             animate={{ rotate: expanded ? 45 : 0 }}
             transition={{ duration: 0.2 }}
-            className="w-8 h-8 border border-border flex items-center justify-center text-muted group-hover:border-accent group-hover:text-accent transition-all"
+            className="w-8 h-8 border border-border flex items-center justify-center text-muted group-hover:border-accent group-hover:text-accent transition-all flex-shrink-0"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4"/>
