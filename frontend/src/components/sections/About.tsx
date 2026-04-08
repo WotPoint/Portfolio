@@ -45,7 +45,7 @@ export default function About({ config }: AboutProps) {
             animate={inView ? 'show' : 'hidden'}
             transition={{ delay: 0.1 }}
           >
-            <h2 className="font-syne font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">
+            <h2 className="font-syne font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight whitespace-pre-line">
               {t('Строю продукты,\nа не просто код', 'I build products,\nnot just code')}
             </h2>
             <p className="font-jakarta text-muted leading-relaxed mb-6">

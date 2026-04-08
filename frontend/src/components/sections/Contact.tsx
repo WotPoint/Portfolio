@@ -14,6 +14,7 @@ export default function Contact({ config }: ContactProps) {
   const [copied, setCopied] = useState(false)
 
   const telegramUrl = config?.telegramUrl || 'https://t.me/Herasova'
+  const telegramHandle = telegramUrl.replace(/^https?:\/\/t\.me\//, '@')
   const email = config?.email || 'kirkaif@gmail.com'
 
   function copyEmail() {
@@ -50,7 +51,7 @@ export default function Contact({ config }: ContactProps) {
             animate={inView ? 'show' : 'hidden'}
             transition={{ delay: 0.1 }}
           >
-            <h2 className="font-syne font-extrabold text-4xl md:text-5xl text-primary leading-tight mb-6">
+            <h2 className="font-syne font-extrabold text-4xl md:text-5xl text-primary leading-tight mb-6 whitespace-pre-line">
               {t('Готов к\nновым проектам', 'Open to\nnew projects')}
             </h2>
             <p className="font-jakarta text-muted leading-relaxed">
@@ -83,7 +84,7 @@ export default function Contact({ config }: ContactProps) {
               <div>
                 <p className="font-mono text-xs text-dim mb-1">Telegram</p>
                 <p className="font-syne font-semibold text-primary group-hover:text-accent transition-colors">
-                  @Herasova
+                  {telegramHandle}
                 </p>
               </div>
               <svg className="w-4 h-4 text-dim ml-auto group-hover:text-accent group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">

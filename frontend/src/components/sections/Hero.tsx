@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLang } from '../../contexts/LangContext'
 import type { SiteConfig } from '../../types'
@@ -10,6 +10,13 @@ interface HeroProps {
 export default function Hero({ config }: HeroProps) {
   const { t } = useLang()
   const cursorRef = useRef<HTMLSpanElement>(null)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 80)
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
 
   // Blinking cursor effect
   useEffect(() => {
@@ -140,9 +147,9 @@ export default function Hero({ config }: HeroProps) {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        animate={{ opacity: scrolled ? 0 : 1 }}
+        transition={{ delay: scrolled ? 0 : 1.5, duration: 0.4 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="font-mono text-xs text-dim">scroll</span>
         <motion.div

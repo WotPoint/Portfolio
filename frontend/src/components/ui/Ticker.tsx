@@ -8,7 +8,7 @@ export default function Ticker({ items }: TickerProps) {
   return (
     <div className="overflow-hidden border-y border-border py-3 bg-surface select-none">
       <div
-        className="flex gap-8 whitespace-nowrap"
+        className="flex gap-8 whitespace-nowrap ticker-track"
         style={{
           animation: 'ticker 25s linear infinite',
           width: 'max-content',
@@ -25,6 +25,9 @@ export default function Ticker({ items }: TickerProps) {
         @keyframes ticker {
           from { transform: translateX(0); }
           to { transform: translateX(-33.333%); }
+        }
+        .overflow-hidden:hover .ticker-track {
+          animation-play-state: paused;
         }
       `}</style>
     </div>
